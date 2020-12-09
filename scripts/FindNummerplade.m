@@ -113,14 +113,14 @@ for i = 1:j
     [m,n] = size(I_segment); %giver matrix størrelse
     for i_top = 1:m %tager fra først række til sidste række
         S = sum(I_segment(i_top,:)); %finder sum
-        if S > 0 %er summen over 1, har vi fundet karakteret
+        if S > 0 %er summen over 1, har vi fundet karakteren
             top = i_top; %aflæser hvor første række med sum er  
             break;
         end
     end
     for i_left = 1:n %tager fra første kolonne til sidste
         S = sum(I_segment(:,i_left)); %finder sum
-        if S > 0 %er summen over 1, har vi fundet karakteret
+        if S > 0 %er summen over 1, har vi fundet karakteren
             left = i_left; %aflæser hvor første kolonne med sum er  
             break;
         end
