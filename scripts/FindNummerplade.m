@@ -10,7 +10,7 @@ Im = rgb2gray(Im); %laver billede til grayscale
 Im = im2double(Im); %laver billede til double
 
 if (Threshold == 0)
-    I_max = max(Im,[],'all'); % max th værdi
+    I_max = max(Im,[],'all'); % max th vÃ¦rdi
     th = I_max/3; %automatiseret threshold
 else
     th = Threshold;
@@ -25,9 +25,9 @@ temp = imread("temp2.jpg");
 temp = rgb2gray(temp); %laver billede til grayscale
 
 if TempScale == 0
-    temp = imresize(temp,2.2); %automatiseret template størrelse
+    temp = imresize(temp,2.2); %automatiseret template stÃ¸rrelse
 else
-    temp = imresize(temp,TempScale); %automatiseret template størrelse
+    temp = imresize(temp,TempScale); %automatiseret template stÃ¸rrelse
 end
 
 temp = im2double(temp); %laver billede til double
@@ -88,7 +88,7 @@ Ic = imclose(I2,SE); %closing, erosion derefter dilation
 Ico = imopen(Ic,SE); %opening, dilation derefter erosion
 
 
-%% Negativ, laver mørk baggrund og lys foregrund
+%% Negativ, laver mÃ¸rk baggrund og lys foregrund
 Im = Ico < 0.5; %numplate 2
 
 
@@ -97,7 +97,7 @@ Im = Ico < 0.5; %numplate 2
 L4 = bwlabel(Im,4); %component connectivity med 4
 %L4rgb = label2rgb(L4); %billedet laves rgb for at se labels
 
-%% Beskærer og printer segmenter ud
+%% BeskÃ¦rer og printer segmenter ud
 %close all;
 j = max(L4,[],'all'); %der findes max antal labels i hele matrix
 
@@ -110,36 +110,36 @@ for i = 1:j
     if k < 2000
         continue;
     end
-    [m,n] = size(I_segment); %giver matrix størrelse
-    for i_top = 1:m %tager fra først række til sidste række
+    [m,n] = size(I_segment); %giver matrix stÃ¸rrelse
+    for i_top = 1:m %tager fra fÃ¸rst rÃ¦kke til sidste rÃ¦kke
         S = sum(I_segment(i_top,:)); %finder sum
         if S > 0 %er summen over 1, har vi fundet karakteren
-            top = i_top; %aflæser hvor første række med sum er  
+            top = i_top; %aflÃ¦ser hvor fÃ¸rste rÃ¦kke med sum er  
             break;
         end
     end
-    for i_left = 1:n %tager fra første kolonne til sidste
+    for i_left = 1:n %tager fra fÃ¸rste kolonne til sidste
         S = sum(I_segment(:,i_left)); %finder sum
         if S > 0 %er summen over 1, har vi fundet karakteren
-            left = i_left; %aflæser hvor første kolonne med sum er  
+            left = i_left; %aflÃ¦ser hvor fÃ¸rste kolonne med sum er  
             break;
         end
     end
-    for i_bot = m:-1:1 %tager fra sidste række til første
+    for i_bot = m:-1:1 %tager fra sidste rÃ¦kke til fÃ¸rste
         S = sum(I_segment(i_bot,:));
         if S > 0
             bot = i_bot;  
             break;
         end
     end
-    for i_right = n:-1:1 %tager fra sidste kolonne til første
+    for i_right = n:-1:1 %tager fra sidste kolonne til fÃ¸rste
         S = sum(I_segment(:,i_right));
         if S > 0
             right = i_right;  
             break;
         end
     end
-  ch = imcrop(I_segment,[left top right-left bot-top]); %beskærer
+  ch = imcrop(I_segment,[left top right-left bot-top]); %beskÃ¦rer
   k = numel(ch);
   if k > 20000
     continue;
